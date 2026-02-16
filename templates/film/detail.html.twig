@@ -1,1 +1,26 @@
-{{film.title}}
+{% extends 'base.html.twig' %}
+
+{% block title %}Details {{film.title}}{% endblock %}
+
+{% block body %}
+<h1>Details du film</h1>
+<div class="h-96 overflow-x-auto">
+<table class="table table-pin-rows bg-base-200">
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>synopsis</th>
+            <th>release_year</th>
+        </tr>
+    </thead>
+    <tbody>        
+        <tr>
+            <td>{{film.title}}</td>
+            <td>{{film.synopsis}}</td>
+            <td>{{film.releaseYear}}</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<a href="{{path('app_film')}}">Retour</a>
+{% endblock %}
