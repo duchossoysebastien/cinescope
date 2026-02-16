@@ -4,7 +4,8 @@
 
 {% block body %}
 <h1>Liste des films</h1>
-<table>
+<div class="h-96 overflow-x-auto">
+<table class="table table-pin-rows bg-base-200">
     <thead>
         <tr>
             <th>title</th>
@@ -15,6 +16,7 @@
     </thead>
     <tbody>
         {% for film in films %}
+        
         <tr>
             <td>{{film.title}}</td>
             <td>{{film.synopsis}}</td>
@@ -26,4 +28,5 @@
 
     </tbody>
 </table>
+</div>
 {% endblock %}
