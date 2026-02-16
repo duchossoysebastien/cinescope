@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FilmController!{% endblock %}
+{% block title %}Liste des films{% endblock %}
 
 {% block body %}
 <h1>Liste des films</h1>
@@ -15,18 +15,27 @@
         </tr>
     </thead>
     <tbody>
-        {% for film in films %}
-        
+        {% set page = app.request.query.get('page', 1) %}
+        {% set films_per_page = 5 %}
+        {% set start = (page - 1) * films_per_page %}
+        {% set end = start + films_per_page %}
+        {% for film in films|slice(start, films_per_page) %}
         <tr>
-            <td>{{film.title}}</td>
-            <td>{{film.synopsis}}</td>
-            <td>{{film.releaseYear}}</td>
-            <td><a href="{{path('détail_film',{'id':film.id})}}">Voir</a></td>
+            <td>{{ film.title }}</td>
+            <td>{{ film.synopsis }}</td>
+            <td>{{ film.releaseYear }}</td>
+            <td><a href="{{ path('détail_film', {'id': film.id}) }}">Voir</a></td>
         </tr>
-        
         {% endfor %}
-
     </tbody>
 </table>
+</div>
+
+<div class="flex justify-center mt-4">
+    <nav class="join">
+        {% for p in 1..3 %}
+            <a class="join-item btn btn-sm {% if page == p %}btn-primary{% else %}btn-outline{% endif %}" href="{{ path('app_film') }}?page={{ p }}">{{ p }}</a>
+        {% endfor %}
+    </nav>
 </div>
 {% endblock %}
