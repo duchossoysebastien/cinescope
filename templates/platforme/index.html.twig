@@ -1,20 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PlatformeController!{% endblock %}
+{% block title %}Liste des plateformes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h1>Liste des plateformes</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Applications/MAMP/htdocs/CEPPIC/symfony/cinescope/cinescope/src/Controller/PlatformeController.php</code></li>
-        <li>Your template at <code>/Applications/MAMP/htdocs/CEPPIC/symfony/cinescope/cinescope/templates/platforme/index.html.twig</code></li>
-    </ul>
-</div>
+<table class="table w-full">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>URL</th>
+			<th>Logo</th>
+			<th>Films disponibles</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for plateforme in platformes %}
+		<tr>
+			<td>{{ plateforme.name.value }}</td>
+			<td>
+				{% if plateforme.url %}
+					<a href="{{ plateforme.url }}" target="_blank">{{ plateforme.url }}</a>
+				{% endif %}
+			</td>
+			<td>
+				{% if plateforme.logo %}
+					<img src="{{ plateforme.logo }}" alt="Logo {{ plateforme.name.value }}" style="height:40px;max-width:100px;" />
+				{% else %}
+					-
+				{% endif %}
+			</td>
+			<td>
+				{% if plateforme.films|length > 0 %}
+					<ul>
+						{% for film in plateforme.films %}
+							<li>{{ film.title }}</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					Aucun film
+				{% endif %}
+			</td>
+		</tr>
+	{% else %}
+		<tr><td colspan="4">Aucune plateforme trouvée.</td></tr>
+	{% endfor %}
+	</tbody>
+</table>
 {% endblock %}
