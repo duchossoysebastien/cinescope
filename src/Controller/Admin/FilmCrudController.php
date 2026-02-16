@@ -24,7 +24,9 @@ class FilmCrudController extends AbstractCrudController
             TextField::new('title', 'Titre'),
             TextareaField::new('synopsis', 'Synopsis')->hideOnIndex(),
             IntegerField::new('releaseYear', 'Année de sortie'),
-            AssociationField::new('plateforme', 'Plateformes'),
+            AssociationField::new('plateforme', 'Plateformes')
+                ->setFormTypeOption('choice_label', 'name.value')
+                ->setFormTypeOption('by_reference', false),
         ];
     }
 }
