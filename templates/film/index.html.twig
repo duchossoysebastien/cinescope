@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FilmController!{% endblock %}
+
+{% block body %}
+<h1>Liste des films</h1>
+<table>
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>synopsis</th>
+            <th>release_year</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for film in films %}
+        <tr>
+            <td>{{film.title}}</td>
+            <td>{{film.synopsis}}</td>
+            <td>{{film.releaseYear}}</td>
+            <td><a href="{{path('détail_film',{'id':film.id})}}">Voir</a></td>
+        </tr>
+        
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}
